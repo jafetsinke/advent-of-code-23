@@ -27,11 +27,17 @@ class Card:
         self.id = card[0].split(" ")[1]
         self.valid = parse_digits_str(game[0])
         self.mine = parse_digits_str(game[1])
-
-        print(self.id, self.valid, self.mine)
+        self.amount = 1
 
     def score(self):
         return compare_digits(self.valid, self.mine)
+    
+    def winning_numbers(self):
+        score = 0
+        for i in range(len(self.mine)):
+            if self.mine[i] in self.valid:
+                score += 1
+        return score
 
 # Part 1
 card_sum_values = 0
@@ -44,3 +50,18 @@ print("Part 1:", card_sum_values)
 
 # Part 2
 
+card_list = []
+for line in lines:
+    card = Card(line.strip())
+    card_list.append(card)
+
+for i in range(len(card_list)):
+    for j in range(card_list[i].winning_numbers()):
+        card_list[i+j+1].amount += card_list[i].amount
+    
+
+total_card_amount = 0;
+for card in card_list:
+    total_card_amount += card.amount
+
+print("Part 2:", total_card_amount)
