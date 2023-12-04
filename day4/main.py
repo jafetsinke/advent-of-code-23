@@ -19,13 +19,28 @@ def compare_digits(valid: list, mine: list):
                 score *= 2
     return score
 
-card_sum_values = 0
+class Card:
+    def __init__(self, card_str: str): # example: "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53"
+        card = line.strip().split(":")
+        game = card[1].split("|")
+
+        self.id = card[0].split(" ")[1]
+        self.valid = parse_digits_str(game[0])
+        self.mine = parse_digits_str(game[1])
+
+        print(self.id, self.valid, self.mine)
+
+    def score(self):
+        return compare_digits(self.valid, self.mine)
+
 # Part 1
+card_sum_values = 0
+
 for line in lines:
-    card = line.strip().split("|")
-    card_valid = parse_digits_str(card[0].split(":")[1])
-    card_mine = parse_digits_str(card[1])
-    card_score = compare_digits(card_valid, card_mine)
-    card_sum_values += card_score
+    card = Card(line.strip())
+    card_sum_values += card.score()
 
 print("Part 1:", card_sum_values)
+
+# Part 2
+
