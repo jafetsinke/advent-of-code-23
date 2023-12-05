@@ -1,10 +1,9 @@
+# this works with the sample input but performance is horrible, hence the rewriting in main2.py
+
 text_file = open('test.txt','r')
 lines = text_file.readlines()
 lines = [line.strip() for line in lines]
 text_file.close()
-
-def convert_lines_to_map(lines):
-    print(lines)
 
 # parse the first line and convert to array of seed numbers
 seeds_to_plant = lines[0].strip()
