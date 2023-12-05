@@ -67,16 +67,33 @@ for i in range(len(lines)):
 # create seed map instances for every chunk
 seed_maps = [SeedMap(map_name, chunk) for map_name, chunk in seed_map_chunks.items()]
 
+def find_lowest_seed_location(seeds: [int], seed_maps: [SeedMap]):
+    lowest_location = None
+    for seed in seeds:
+        location = lookup_seed(int(seed), seed_maps)
+        if lowest_location == None:
+            lowest_location = location
+        else:
+            lowest_location = min(lowest_location, location)
 
-lowest_location = None
-for seed in seeds_to_plant:
-    location = lookup_seed(int(seed), seed_maps)
-    if lowest_location == None:
-        lowest_location = location
-    else:
-        lowest_location = min(lowest_location, location)
+    return lowest_location
 
-print('lowest location: ' + str(lowest_location))
+def find_lowest_seed_location_range(start: int, end: int, seed_maps: [SeedMap]):
+    lowest_location = None
+    for seed in range(start, end):
+        location = lookup_seed(int(seed), seed_maps)
+        if lowest_location == None:
+            lowest_location = location
+        else:
+            lowest_location = min(lowest_location, location)
+
+    return lowest_location
+
+# part 1
+print('lowest location: ' + str(find_lowest_seed_location(seeds_to_plant, seed_maps)))
+
+# part 2 
+
 
 
 # small test to check if code is working properly
