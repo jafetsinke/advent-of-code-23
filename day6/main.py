@@ -1,5 +1,3 @@
-
-
 class Game:
     def __init__(self, time: int, distance: int):
         self.time = time
@@ -47,6 +45,7 @@ games = []
 if len(times) != len(distances):
     raise Exception('times and distances must be the same length')
 
+# part 1
 for i in range(len(times)):
     games.append(Game(times[i], distances[i]))
 
@@ -62,10 +61,7 @@ print('part 1:', multiplied_possible_wins)
 
 
 # part 2
-print(times)
-print(distances)
-
 time = ''.join((str(t) for t in times))
 distance = ''.join((str(d) for d in distances))
 game = Game(int(time), int(distance))
-print(len(game.cal_possible_wins()))
+print("part 2:", len(game.cal_possible_wins()))
