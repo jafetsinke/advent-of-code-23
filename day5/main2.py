@@ -94,6 +94,20 @@ print('lowest location: ' + str(find_lowest_seed_location(seeds_to_plant, seed_m
 
 # part 2 
 
+ranges = []
+for i, seed in enumerate(seeds_to_plant):
+    is_even = (i + 1) % 2 == 0
+    if is_even:
+        start = int(seeds_to_plant[i-1])
+        end = start + int(seeds_to_plant[i])
+        ranges.append([start, end])
+
+
+for r in ranges:
+    print(r)
+    # lowest = find_lowest_seed_location_range(r[0], r[1], seed_maps)
+    # print(lowest, "for range ", r)
+
 
 
 # small test to check if code is working properly
